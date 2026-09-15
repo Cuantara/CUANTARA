@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="CUANTARA: herramientas sencillas para entender tu dinero, tu vivienda y tus decisiones financieras.">
+
+<title>CUANTARA | Calcula antes de decidir</title>
+
+
+<style>
+
+/* =========================
+   BASE
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f6f7f9;
+    color: #202633;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: rgba(255,255,255,0.96);
+
+    border-bottom: 1px solid #e5e7eb;
+
+    padding: 18px 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.logo-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #202633;
+    margin-left: 3px;
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 15px;
+    color: #555d69;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #202633;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    background: white;
+    padding: 90px 6% 85px;
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-block;
+
+    background: #f0f2f5;
+
+    padding: 8px 15px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    max-width: 800px;
+
+    margin: 0 auto 20px;
+
+    font-size: 52px;
+
+    line-height: 1.08;
+
+    letter-spacing: -1.5px;
+}
+
+.hero h1 span {
+    color: #555d69;
+}
+
+.hero p {
+    max-width: 650px;
+
+    margin: 0 auto 35px;
+
+    color: #69717d;
+
+    font-size: 19px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-block;
+
+    padding: 14px 24px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    border: 1px solid #202633;
+}
+
+.button-primary {
+    background: #202633;
+    color: white;
+}
+
+.button-secondary {
+    background: white;
+    color: #202633;
+}
+
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+.section {
+    padding: 70px 6%;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+.section-header h2 {
+    margin: 0 0 12px;
+    font-size: 34px;
+}
+
+.section-header p {
+    margin: 0;
+    color: #6b7280;
+}
+
+
+/* =========================
+   CATEGORY CARDS
+========================= */
+
+.categories {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.category {
+    background: white;
+
+    border: 1px solid #e4e7eb;
+
+    border-radius: 14px;
+
+    padding: 27px;
+
+    transition: transform 0.2s,
+                box-shadow 0.2s;
+}
+
+.category:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.06);
+}
+
+.category-icon {
+    font-size: 29px;
+    margin-bottom: 15px;
+}
+
+.category h3 {
+    margin: 0 0 9px;
+    font-size: 20px;
+}
+
+.category p {
+    margin: 0;
+    color: #69717d;
+    font-size: 14px;
+}
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+.calculator-section {
+    background: #f6f7f9;
+}
+
+.calculator {
+    max-width: 900px;
+
+    margin: auto;
+
+    background: white;
+
+    border: 1px solid #e1e4e8;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.04);
+}
+
+.calculator-title {
+    margin-bottom: 28px;
+}
+
+.calculator-title h3 {
+    margin: 0 0 7px;
+    font-size: 24px;
+}
+
+.calculator-title p {
+    margin: 0;
+    color: #707784;
+    font-size: 14px;
+}
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 22px;
+}
+
+.field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.field input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #cfd4da;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+.field input:focus {
+    border-color: #202633;
+
+    box-shadow:
+        0 0 0 3px rgba(32,38,51,0.08);
+}
+
+.field-help {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #858c96;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   CALCULATE BUTTON
+========================= */
+
+.calculate-button {
+    width: 100%;
+
+    margin-top: 28px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #202633;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.calculate-button:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   RESULTS
+========================= */
+
+.results {
+    margin-top: 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+.result-card {
+    background: #f6f7f9;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    text-align: center;
+}
+
+.result-label {
+    color: #69717d;
+
+    font-size: 13px;
+}
+
+.result-value {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 24px;
+
+    font-weight: 800;
+}
+
+
+/* =========================
+   FINANCING INFO
+========================= */
+
+.financing {
+    margin-top: 18px;
+
+    padding: 17px 20px;
+
+    border-radius: 10px;
+
+    background: #f6f7f9;
+
+    font-size: 14px;
+}
+
+.financing strong {
+    font-size: 16px;
+}
+
+
+/* =========================
+   FUTURE TOOLS
+========================= */
+
+.future-tools {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.future-card {
+    background: white;
+
+    border: 1px solid #e4e7eb;
+
+    border-radius: 14px;
+
+    padding: 25px;
+}
+
+.future-card h3 {
+    margin-top: 0;
+}
+
+.future-card p {
+    color: #69717d;
+
+    font-size: 14px;
+}
+
+.coming-soon {
+    display: inline-block;
+
+    margin-top: 8px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background: #f0f2f5;
+
+    color: #646b75;
+}
+
+
+/* =========================
+   DISCLAIMER
+========================= */
+
+.disclaimer-section {
+    padding: 30px 6%;
+}
+
+.disclaimer {
+    max-width: 900px;
+
+    margin: auto;
+
+    color: #777f8a;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: #202633;
+
+    color: white;
+
+    padding: 40px 6%;
+
+    text-align: center;
+}
+
+.footer-logo {
+    font-size: 23px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+}
+
+footer p {
+    margin: 5px 0;
+
+    color: #c7cbd1;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .categories {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .future-tools {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    header {
+        padding: 16px 5%;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 65px 5%;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .section {
+        padding: 50px 5%;
+    }
+
+    .categories,
+    .future-tools,
+    .form-grid,
+    .results {
+        grid-template-columns: 1fr;
+    }
+
+    .calculator {
+        padding: 25px 20px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        CUANTARA<span class="logo-dot"></span>
+    </div>
+
+    <nav>
+
+        <a href="#herramientas">
+            Herramientas
+        </a>
+
+        <a href="#hipoteca">
+            Hipoteca
+        </a>
+
+        <a href="#proximamente">
+            Próximamente
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-badge">
+        Herramientas gratuitas para España
+    </div>
+
+    <h1>
+        Calcula antes de <span>decidir.</span>
+    </h1>
+
+    <p>
+        Calculadoras sencillas para entender mejor
+        tu dinero, tu vivienda y tus decisiones financieras.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a
+            class="button button-primary"
+            href="#hipoteca"
+        >
+            Calcular mi hipoteca
+        </a>
+
+        <a
+            class="button button-secondary"
+            href="#herramientas"
+        >
+            Ver herramientas
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CATEGORÍAS
+========================= -->
+
+<section
+    class="section"
+    id="herramientas"
+>
+
+    <div class="section-header">
+
+        <h2>
+            Herramientas de CUANTARA
+        </h2>
+
+        <p>
+            Una colección de herramientas prácticas
+            para tomar decisiones con números delante.
+        </p>
+
+    </div>
+
+
+    <div class="categories">
+
+
+        <div class="category">
+
+            <div class="category-icon">
+                🏠
+            </div>
+
+            <h3>
+                Vivienda
+            </h3>
+
+            <p>
+                Hipotecas, compra de vivienda,
+                ahorro necesario y comparación
+                entre comprar y alquilar.
+            </p>
+
+        </div>
+
+
+
+        <div class="category">
+
+            <div class="category-icon">
+                💶
+            </div>
+
+            <h3>
+                Dinero
+            </h3>
+
+            <p>
+                Salarios, préstamos, intereses,
+                financiación y otras decisiones
+                financieras.
+            </p>
+
+        </div>
+
+
+
+        <div class="category">
+
+            <div class="category-icon">
+                📈
+            </div>
+
+            <h3>
+                Ahorro
+            </h3>
+
+            <p>
+                Calcula cuánto puedes ahorrar,
+                cuánto crecerá tu dinero y cuánto
+                necesitas para alcanzar tus objetivos.
+            </p>
+
+        </div>
+
+
+
+        <div class="category">
+
+            <div class="category-icon">
+                💼
+            </div>
+
+            <h3>
+                Trabajo
+            </h3>
+
+            <p>
+                Herramientas relacionadas con
+                salario, horas de trabajo, pagas
+                y otros cálculos laborales.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CALCULADORA HIPOTECA
+========================= -->
+
+<section
+    class="section calculator-section"
+    id="hipoteca"
+>
+
+    <div class="section-header">
+
+        <h2>
+            Calculadora de hipoteca
+        </h2>
+
+        <p>
+            Descubre cuánto podrías pagar cada mes
+            según el precio de la vivienda y tus ahorros.
+        </p>
+
+    </div>
+
+
+    <div class="calculator">
+
+
+        <div class="calculator-title">
+
+            <h3>
+                Calcula tu cuota
+            </h3>
+
+            <p>
+                Introduce tus datos y CUANTARA calculará
+                una estimación de tu financiación.
+            </p>
+
+        </div>
+
+
+
+        <div class="form-grid">
+
+
+            <div class="field">
+
+                <label for="precio">
+                    Precio de la vivienda (€)
+                </label>
+
+                <input
+                    type="number"
+                    id="precio"
+                    value="250000"
+                    min="0"
+                    step="1000"
+                >
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label for="ahorros">
+                    Ahorros disponibles (€)
+                </label>
+
+                <input
+                    type="number"
+                    id="ahorros"
+                    value="50000"
+                    min="0"
+                    step="1000"
+                >
+
+                <span class="field-help">
+                    Dinero que tienes disponible para la compra.
+                </span>
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label for="interes">
+                    Tipo de interés anual (%)
+                </label>
+
+                <input
+                    type="number"
+                    id="interes"
+                    value="3"
+                    min="0"
+                    step="0.01"
+                >
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label for="anos">
+                    Duración de la hipoteca (años)
+                </label>
+
+                <input
+                    type="number"
+                    id="anos"
+                    value="30"
+                    min="1"
+                    max="50"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <button
+            class="calculate-button"
+            onclick="calcularHipoteca()"
+        >
+            Calcular mi hipoteca
+        </button>
+
+
+
+        <div class="results">
+
+
+            <div class="result-card">
+
+                <span class="result-label">
+                    Hipoteca necesaria
+                </span>
+
+                <strong
+                    class="result-value"
+                    id="capital"
+                >
+                    —
+                </strong>
+
+            </div>
+
+
+
+            <div class="result-card">
+
+                <span class="result-label">
+                    Cuota mensual
+                </span>
+
+                <strong
+                    class="result-value"
+                    id="cuota"
+                >
+                    —
+                </strong>
+
+            </div>
+
+
+
+            <div class="result-card">
+
+                <span class="result-label">
+                    Intereses totales
+                </span>
+
+                <strong
+                    class="result-value"
+                    id="intereses"
+                >
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="financing">
+
+            <strong>
+                Financiación:
+            </strong>
+
+            <span id="financiacion">
+                —
+            </span>
+
+        </div>
+
+
+
+        <p class="disclaimer">
+
+            Esta calculadora ofrece una estimación orientativa.
+            No incluye impuestos, gastos de compraventa,
+            seguros, comisiones u otros costes asociados.
+            Las condiciones reales dependen de cada entidad
+            financiera y de la situación del solicitante.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     PRÓXIMAS HERRAMIENTAS
+========================= -->
+
+<section
+    class="section"
+    id="proximamente"
+>
+
+    <div class="section-header">
+
+        <h2>
+            Próximamente en CUANTARA
+        </h2>
+
+        <p>
+            Estamos construyendo herramientas para
+            cubrir las decisiones económicas del día a día.
+        </p>
+
+    </div>
+
+
+    <div class="future-tools">
+
+
+        <div class="future-card">
+
+            <h3>
+                🏡 ¿Cuánto puedo pagar por una vivienda?
+            </h3>
+
+            <p>
+                Calcula un precio máximo de vivienda
+                según tus ingresos y tu capacidad de pago.
+            </p>
+
+            <span class="coming-soon">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+
+
+        <div class="future-card">
+
+            <h3>
+                💰 ¿Cuánto necesito ahorrar para comprar?
+            </h3>
+
+            <p>
+                Estima el dinero que necesitas reunir
+                antes de comprar una vivienda.
+            </p>
+
+            <span class="coming-soon">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+
+
+        <div class="future-card">
+
+            <h3>
+                🏠 Comprar o alquilar
+            </h3>
+
+            <p>
+                Compara el coste de comprar una vivienda
+                frente a mantener un alquiler.
+            </p>
+
+            <span class="coming-soon">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+
+
+        <div class="future-card">
+
+            <h3>
+                💶 Salario bruto → neto
+            </h3>
+
+            <p>
+                Estima cuánto dinero puedes recibir
+                realmente después de impuestos y cotizaciones.
+            </p>
+
+            <span class="coming-soon">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+
+
+        <div class="future-card">
+
+            <h3>
+                📊 Interés compuesto
+            </h3>
+
+            <p>
+                Descubre cómo puede crecer tu ahorro
+                con aportaciones periódicas.
+            </p>
+
+            <span class="coming-soon">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+
+
+        <div class="future-card">
+
+            <h3>
+                🏦 Comparador de préstamos
+            </h3>
+
+            <p>
+                Compara cuotas, intereses y coste total
+                de diferentes préstamos.
+            </p>
+
+            <span class="coming-soon">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     DISCLAIMER
+========================= -->
+
+<section class="disclaimer-section">
+
+    <p class="disclaimer">
+
+        CUANTARA ofrece herramientas informativas y
+        cálculos orientativos. La información proporcionada
+        no constituye asesoramiento financiero, fiscal,
+        jurídico ni profesional. Antes de tomar decisiones
+        económicas importantes, consulta las condiciones
+        concretas aplicables a tu situación.
+
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        CUANTARA
+    </div>
+
+    <p>
+        Herramientas para entender tu dinero y tu vivienda.
+    </p>
+
+    <p>
+        © 2026 CUANTARA
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+function formatearEuros(numero) {
+
+    return numero.toLocaleString(
+        "es-ES",
+        {
+            style: "currency",
+            currency: "EUR",
+            maximumFractionDigits: 2
+        }
+    );
+
+}
+
+
+function calcularHipoteca() {
+
+
+    const precio =
+        Number(
+            document.getElementById("precio").value
+        );
+
+
+    const ahorros =
+        Number(
+            document.getElementById("ahorros").value
+        );
+
+
+    const interes =
+        Number(
+            document.getElementById("interes").value
+        );
+
+
+    const anos =
+        Number(
+            document.getElementById("anos").value
+        );
+
+
+    if (
+        precio <= 0 ||
+        ahorros < 0 ||
+        interes < 0 ||
+        anos <= 0
+    ) {
+
+        alert(
+            "Comprueba los datos introducidos."
+        );
+
+        return;
+
+    }
+
+
+    const capital =
+        precio - ahorros;
+
+
+    if (capital <= 0) {
+
+        document.getElementById("capital")
+            .textContent = "0 €";
+
+        document.getElementById("cuota")
+            .textContent = "0 €";
+
+        document.getElementById("intereses")
+            .textContent = "0 €";
+
+        document.getElementById("financiacion")
+            .textContent =
+            "Tus ahorros cubren el precio introducido.";
+
+        return;
+
+    }
+
+
+    const meses =
+        anos * 12;
+
+
+    const interesMensual =
+        interes / 100 / 12;
+
+
+    let cuota;
+
+
+    if (interesMensual === 0) {
+
+        cuota =
+            capital / meses;
+
+    }
+
+    else {
+
+        cuota =
+            capital *
+            (
+                interesMensual *
+                Math.pow(
+                    1 + interesMensual,
+                    meses
+                )
+            )
+            /
+            (
+                Math.pow(
+                    1 + interesMensual,
+                    meses
+                ) - 1
+            );
+
+    }
+
+
+    const totalPagado =
+        cuota * meses;
+
+
+    const interesesTotales =
+        totalPagado - capital;
+
+
+    const porcentajeFinanciacion =
+        (capital / precio) * 100;
+
+
+    document.getElementById("capital")
+        .textContent =
+        formatearEuros(capital);
+
+
+    document.getElementById("cuota")
+        .textContent =
+        formatearEuros(cuota);
+
+
+    document.getElementById("intereses")
+        .textContent =
+        formatearEuros(interesesTotales);
+
+
+    document.getElementById("financiacion")
+        .textContent =
+        porcentajeFinanciacion.toFixed(1)
+        + "% del precio de la vivienda";
+
+
+}
+
+
+/* Calcular automáticamente al abrir */
+
+calcularHipoteca();
+
+</script>
+
+
+</body>
+</html>
